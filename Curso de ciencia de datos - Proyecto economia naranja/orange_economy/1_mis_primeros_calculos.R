@@ -11,7 +11,7 @@
 4^2
 
 # asi asginamos valores a variables (tambien debemos ejecutarlo con CTRL+ENTER para que se lleve a cabo
-# la asginaciÛn porque sino en el siguiente paso nos va a tirar error cuando queramos ver su valor)
+# la asginaci?n porque sino en el siguiente paso nos va a tirar error cuando queramos ver su valor)
 x <- 86
 
 # asi llamamos a la variable (para ver el valor, igual que antes CTRL+ENTER selecionando la linea)
@@ -32,14 +32,14 @@ tiempo_al_dia
 # usamos un datasets de "mtcars" y lo instalamos en la consola con el siguiente comando:
 # install.packages("mtcars")
 # tambien una vez escrito esto en la consola lo ejecutamos selecionandolo y precionando CTRL+ENTER
-# como no est· mas habilitado... lo vamos a tener que sacar del github de la profe
+# como no est? mas habilitado... lo vamos a tener que sacar del github de la profe
 
 
-# STR significa ESTRUCTURA, y asÌ vinculamos los datos a nuestra hoja de R. Notese que cuando ejecutamos
-# en la consola nos muestra todos los datos y la definiciÛn del tipo de dato que son
+# STR significa ESTRUCTURA, y as? vinculamos los datos a nuestra hoja de R. Notese que cuando ejecutamos
+# en la consola nos muestra todos los datos y la definici?n del tipo de dato que son
 # tener en cuenta que si no conocemos el dataset podemos preguntarle en la consola tipiando:
 # ?mtscars
-# e inmediatamente nos mostrara en la solapa help a tu derecha una biblioteca con informaciÛn de la libreria
+# e inmediatamente nos mostrara en la solapa help a tu derecha una biblioteca con informaci?n de la libreria
 str(mtcars)
 
 # verifiquemos el tipo de estructura de una variable, por ejemplo la de "vs"
@@ -95,7 +95,7 @@ dias_aprendizaje <- c("Lunes", "Martes", "Miercoles", "Jueves", "Viernes")
 dias_que_estuvimos_mas_de_20_min <- c(TRUE, FALSE, FALSE, TRUE, TRUE)
 dias_que_estuvimos_mas_de_20_min
 
-# øcuanto tiempo adicional tenemos cada dia para nuestro aprendizaje?
+# ?cuanto tiempo adicional tenemos cada dia para nuestro aprendizaje?
 total_tiempo_platzi <- sum(tiempo_platzi)
 total_tiempo_platzi
 total_tiempo_lecturas <- sum(tiempo_lecturas)
@@ -103,7 +103,7 @@ total_tiempo_lecturas
 total_tiempo_adicional <- total_tiempo_platzi + total_tiempo_lecturas
 total_tiempo_adicional
 
-# no responde a la pregunta, nos da un total, yo quiero para cada dÌa, entonces, necesito trabajar con matrices
+# no responde a la pregunta, nos da un total, yo quiero para cada d?a, entonces, necesito trabajar con matrices
 # matriz de fila X columna
 # creamos la matriz cruda
 matriz_tiempo <- matrix(c(tiempo_platzi, tiempo_lecturas), nrow=2, byrow=TRUE)
@@ -115,15 +115,15 @@ colnames(matriz_tiempo) <- dias
 rownames(matriz_tiempo) <- actividad
 # la observamos
 matriz_tiempo
-# respondamos dÌa por dÌa los resultados. Esto se logra sumando todas las filas de una misma columna
+# respondamos d?a por d?a los resultados. Esto se logra sumando todas las filas de una misma columna
 colSums(matriz_tiempo)
 
 #############
 # VIDEO 2.5 #
 #############
 
-# aprendamos mas agregando una actividad nueva como oir un podcast cada dÌa, es decir, nueva fila
-# debemos usar rbind que nos aÒade un nuevo vector como fila a nuestra matriz
+# aprendamos mas agregando una actividad nueva como oir un podcast cada d?a, es decir, nueva fila
+# debemos usar rbind que nos a?ade un nuevo vector como fila a nuestra matriz
 matriz_final <- rbind(matriz_tiempo, c(10,15,30,5,0))
 colSums(matriz_final)
 
@@ -142,10 +142,161 @@ matriz_super_final
 # comparadores para buscar datos
 # ?? !? < <= > >= !
 # | = 0
-# %in% = significa que algo estÈ en el dataset
+# %in% = significa que algo est? en el dataset
 # exploremos el dataset de mtcars
 
 # busquemos los autos que tengan menos de 6 cilindros 
 # (ojo la coma al final indica que busque en todo el dataset/observaciones/filas)
 mtcars[mtcars$cyl < 6,]
+
+# que paises tienen un PBI mayor o igual a 15000 en todos los paises?
+orangeec[orangeec$GDP.PC>=15000,]
+
+# que paises tienen un aporte a su PBI a travez de la economia naranja (economias creativas) 
+# menor o igual al 2% del PBI de ese pais
+orangeec[orangeec$Creat.Ind...GDP<=2,]
+
+# hagamos subsettings
+# paises que tienen mas de un 80% de su poblaccion con acceso a internet y ademas mas del 4,5%
+# de su PBI est√° destinado en educaci√≥n
+neworangeec <- subset(orangeec, Internet.penetration...population > 80
+                      & Education.invest...GDP >= 4.5)
+neworangeec
+
+# ahora queremos saber el porcentaje de PBI que aportan por econom√≠a naranja aquellos
+# paises que tienen mas de un 80% de su poblaccion con acceso a internet y ademas mas del 4,5%
+# de su PBI est√° destinado en educaci√≥n
+neworangeec <- subset(orangeec, Internet.penetration...population > 80
+                                 & Education.invest...GDP >= 4.5,
+                      select = Creat.Ind...GDP)
+neworangeec
+
+# instalamos el paquete "plyr" por consola con el comando:
+# install.packages("plyr")
+#library(plyr)
+rename(orangeec, c("Creat.Ind...GDP" = "AporteEcNja"))
+                   
+#############
+# VIDEO 2.5 #
+#############
+
+nivel_curso <- c("Basico", "Intermedio", "Avanzado")
+nivel_curso
+
+# nos muestra los primeros 6 datos del dataset
+head(mtcars)
+
+# nos muestra los ultimos 6 datos del dataset
+tail(mtcars)
+
+# instalo el siguiente paquete:
+# install.packages("dplyr")
+#library(dplyr)
+# los textos son fct = factor, y los numericos son dbl = double
+glimpse(orangeec)
+
+# listas, almacenamos cualquier tipo de estructura
+new_vector <- 1:8
+new_matriz <- matrix(1:9, ncol=3)
+dataframe <- mtcars[1:4,] 
+new_vector
+new_matriz
+dataframe
+new_lista <- list(new_vector, new_matriz, dataframe)
+new_lista
+
+#################
+# VIDEO 3.1-2-3 #
+#################
+
+# grafico de barras -> ordenado por tama√±o de barra de mayor a menor
+# histograma -> sigue el patron del eje
+# grafica de disperci√≥n o scatter plot -> solo numeros en cada eje y los puntos no se pueden unir
+# grafica de lineas -> idem que antes pero sin las restricciones
+# box plot -> rectangulo compuesto por 1/4, 1/2 y 3/4, con minimo y maximo extendidos por una linea
+
+#############
+# VIDEO 3.4 #
+#############
+
+# grafica de dispercion
+# primeros parametros son los valores de los puntos
+# segundos parametros son los nombres del eje
+# tercer parametro es el titulo de la grafica de dispercion
+plot(mtcars$mpg ~ mtcars$cyl,
+     xlab="cilindros", ylab="millas por galon",
+     main="relacion cilindos y millas por galon")
+plot(mtcars$mpg ~ mtcars$hp,
+     xlab="caballos de fuerza", ylab="millas por galon",
+     main="relacion caballos de fuerza y millas por galon")
+plot(orangeec$Unemployment ~ orangeec$Education.invest...GDP,
+     xlab="Inversion en educacion (% del PBI)", 
+     ylab="Desempleo",
+     main="relacion inversion en educacion y desempleo")
+plot(orangeec$GDP.PC ~ orangeec$Creat.Ind...GDP,
+     xlab="Aporte economia naranja al PIB(%)", 
+     ylab="PIB per capita",
+     main="relacion economia naranja y PIB per capita")
+
+#############
+# VIDEO 3.4 #
+#############
+
+# histogramas
+# instalo ggplot2, con:
+# install.packages("ggplot2")
+# bin = binwidth = ancho de cada barra
+qplot(mtcars$hp,
+      geom="histogram", # la geometria
+      xlab="caballos de fuerza",
+      main="Carros segun caballos de fuerza")
+
+
+ggplot(mtcars, 
+          aes(x=hp) # aes hace referencia a estetica
+       ) + 
+  geom_histogram() +
+  labs(x="caballos de fuerza", 
+       y="cantidad de carros",
+       title="caballos de fuerza en carros seleccionados") +
+  theme(legend.position = "none") + #posicion de la leyenda
+  theme(panel.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+
+# vamos a cambiarle el ancho a las barras, a 30 opciones por barra
+ggplot(mtcars, aes(x=hp)) + 
+  geom_histogram(binwidth = 30) +
+  labs(x="caballos de fuerza", 
+       y="cantidad de carros",
+       title="caballos de fuerza en carros seleccionados") +
+  theme(legend.position = "none") +
+  theme(panel.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+
+
+ggplot() +
+  geom_histogram(data=mtcars,
+                 aes(x=hp),
+                 fill="blue", # barritas de color azul
+                 color="red", # y un contorno rojo
+                 binwidth = 20)  +
+  labs(x="caballos de fuerza", 
+       y="cantidad de carros",
+       title="caballos de fuerza en carros seleccionados") +
+  xlim(c(80,280)) + # ajustamos el eje x con un limite y lo defino por un contenedor
+  theme(legend.position = "none") +
+  theme(panel.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank())
+  
+
+
+
+
+
+
+
+
 
